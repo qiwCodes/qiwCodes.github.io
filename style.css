@@ -917,7 +917,7 @@ body {
 @media (max-width: 768px) {
   .promise .foreground-2 {
     position: absolute;
-    top: 7dvh;
+    top: 10dvh;
     left: 1dvw;
     width: 100%;
     height: auto;
