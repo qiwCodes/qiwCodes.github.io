@@ -1,0 +1,934 @@
+/* === Global Reset === */
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Base Styles === */
+html,
+body {
+  overflow-x: hidden;
+  font-family: "Noto Sans Thai", sans-serif;
+  background-image: url("/imgs/IMG_7414.jpg");
+  background-size: contain;
+  background-color: #ffffff;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Container === */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.322);
+  border-radius: 15px;
+  gap: 20px;
+
+  /* === Row 1 === */
+  & > .row-1 {
+    display: flex;
+    justify-content: center;
+
+    /* === Columns === */
+    & > .col-1,
+    & > .col-2 {
+      flex: 1;
+      padding: 10px;
+      color: #000000;
+      border: 2px solid #000;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* === Responsive: Mobile Layout === */
+    @media (max-width: 768px) {
+      flex-direction: column;
+
+      & > .col-1,
+      & > .col-2 {
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+/* === Column 1 (Video Section) === */
+.col-1 {
+  & video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+/* === Column 2 (Text Section) === */
+#main {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.col-2 {
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* === Intro Overlay === */
+.intro {
+  position: fixed;
+  inset: 0;
+  background: #0e1029; /* เข้มหน่อยเพื่อให้วิดีโอข้างหลังไม่แย่งสายตา */
+  color: #fff;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  transition: opacity 400ms ease;
+
+  &.is-done {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  & .intro__center {
+    padding: 24px;
+  }
+
+  & .intro__text {
+    font-family: "Noto Sans Thai", sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 6vw, 48px);
+    letter-spacing: 0.5px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 700ms ease, transform 700ms ease;
+
+    &.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    &.is-out {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+}
+
+/* === Reveal main after intro === */
+.container {
+  &.is-hidden {
+    opacity: 0;
+    filter: blur(2px);
+    transition: opacity 500ms ease, filter 500ms ease;
+  }
+  &.is-reveal {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* === Audio CTA === */
+.audio-cta {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10000;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: #111827;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.audio-cta:active {
+  transform: scale(0.98);
+}
+
+/* === Volume Control === */
+.volume-control {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(17, 24, 39, 0.85);
+  border-radius: 999px;
+  padding: 8px 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 20px;
+}
+
+.volume-control input[type="range"] {
+  appearance: none;
+  width: 100px;
+  height: 4px;
+  background: #fff;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff0080;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+}
+
+/* === Floating Hearts Following Cursor === */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.heart {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #ff74b1;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: heartFloat 1.8s ease-out forwards;
+}
+
+@keyframes heartFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-60px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.8);
+  }
+}
+
+/* === Memories Section (Simplified layout) === */
+/* === Memories Section: รูปซ้าย ข้อความขวา === */
+.memories {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-top: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.memory {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease-out;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.memory.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* รูปภาพอยู่ซ้าย */
+.memory .photo {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.memory .photo img {
+  width: 100%;
+  min-width: 300px;
+  max-width: 350px; /* 👈 จำกัดขนาดรูป */
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ข้อความอยู่ขวา */
+.memory .text {
+  flex: 1;
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease;
+}
+
+.memory .text h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.memory .text p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.memory .photo img:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.memory .text:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+/* 🧁 Responsive (มือถือ → เรียงบนล่าง) */
+@media (max-width: 768px) {
+  .memory {
+    flex-direction: column;
+    text-align: center;
+  }
+  .memory .photo {
+    justify-content: center;
+  }
+  .memory .text {
+    text-align: center;
+  }
+}
+
+.top-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.top-image img {
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 300px;
+  min-width: 300px;
+  text-align: center;
+}
+
+/* === Gallery Section === */
+.gallery {
+  margin-top: 40px;
+  padding: 10px 0 0;
+  position: relative;
+  z-index: 2; /* ให้อยู่เหนือพื้นหลังหัวใจ */
+}
+
+.gallery-title {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+/* === Carousel === */
+.carousel {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 44px; /* เว้นที่ให้ปุ่มซ้ายขวา */
+}
+
+.viewport {
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px);
+}
+
+.track {
+  list-style: none;
+  display: flex;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  /* ให้แตะ-ปัดลื่นใน iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+.slide {
+  min-width: 100%;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh; /* กันภาพสูงเกิน */
+  object-fit: cover;
+  display: block;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.25);
+  margin: 0 14px;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+/* ปุ่มนำทาง */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(17, 24, 39, 0.9);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.nav:active {
+  transform: translateY(-50%) scale(0.98);
+}
+.nav.prev {
+  left: 4px;
+}
+.nav.next {
+  right: 4px;
+}
+
+/* จุดบอกตำแหน่ง */
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+}
+.dots button[aria-current="true"] {
+  background: #ff66b3;
+  transform: scale(1.25);
+}
+
+/* มือถือ */
+@media (max-width: 768px) {
+  .carousel {
+    padding: 0 36px;
+  }
+  .nav {
+    width: 32px;
+    height: 32px;
+  }
+  .caption {
+    font-size: 0.95rem;
+  }
+}
+
+.top-image .foreground {
+  position: absolute;
+  top: 94vh;
+  left: 112vh;
+  width: 100%;
+  height: auto;
+  max-width: 130px !important;
+  min-width: unset;
+  z-index: 5;
+  box-shadow: none;
+  transform: rotate(-10deg);
+  -webkit-transform: rotate(12deg);
+  -moz-transform: rotate(12deg);
+  -ms-transform: rotate(12deg);
+  -o-transform: rotate(12deg);
+}
+
+/* มือถือ */
+@media (max-width: 768px) {
+  .top-image .foreground {
+    position: absolute;
+    top: 64dvh;
+    left: 72dvw;
+    width: 100%; /* Forced smaller width */
+    height: auto;
+    max-width: 110px !important; /* Forced smaller max-width */
+    min-width: unset; /* Remove any minimum width constraints */
+    z-index: 5;
+    box-shadow: none;
+    transform: rotate(-10deg);
+    -webkit-transform: rotate(12deg);
+    -moz-transform: rotate(12deg);
+    -ms-transform: rotate(12deg);
+    -o-transform: rotate(12deg);
+  }
+}
+
+/* === Soft Glow รอบภาพ === */
+.slide img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(255, 200, 255, 0.5),
+    0 0 25px rgba(255, 150, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slide img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(255, 220, 255, 0.7),
+    0 0 40px rgba(255, 180, 255, 0.4);
+}
+
+/* === Flash Overlay === */
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4rem;
+  filter: blur(8px);
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 0.4s ease-out;
+}
+
+.flash.active {
+  opacity: 0.9;
+}
+
+/* === Heart Pop === */
+.heart-pop {
+  position: absolute;
+  font-size: 1.5rem;
+  pointer-events: none;
+  animation: heartRise 1.2s ease-out forwards;
+  z-index: 25;
+}
+
+@keyframes heartRise {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  70% {
+    transform: translateY(-60px) scale(1.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(0.8);
+  }
+}
+
+/* === 💌 Love Letter Section === */
+.love-letter {
+  margin-top: 2rem;
+  background: linear-gradient(180deg, #e5faff 0%, #f7ffff 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.paper {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 150, 200, 0.3);
+  padding: 40px 60px;
+  max-width: 700px;
+  text-align: left;
+  position: relative;
+}
+
+.text-area {
+  color: #222;
+  font-family: "Noto Serif Thai", "Great Vibes", cursive;
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  white-space: pre-line;
+  min-height: 300px;
+}
+
+.signature {
+  margin-top: 30px;
+  font-family: "Great Vibes", cursive;
+  font-size: 1.8rem;
+  color: #e85b81;
+  text-align: right;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Floating hearts 💕 */
+.love-letter::before,
+.love-letter::after {
+  content: "💖";
+  position: absolute;
+  font-size: 1.6rem;
+  opacity: 0.5;
+  animation: floatHeart 6s ease-in-out infinite;
+}
+
+.love-letter::before {
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+.love-letter::after {
+  bottom: 10%;
+  right: 20%;
+  animation-delay: 2s;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-25px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+}
+
+/* === 💘 Who’s More Likely To Game === */
+.love-game {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff0f5 0%, #ffe6f0 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-container {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(255, 100, 180, 0.3);
+  text-align: center;
+  padding: 40px 30px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+.game-title {
+  font-size: 1.8rem;
+  color: #e85b81;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.question {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #333;
+  line-height: 2rem;
+  transition: opacity 0.4s ease;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.btn.me {
+  background: linear-gradient(135deg, #ff7eb9, #ff758c);
+}
+.btn.you {
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.start-btn {
+  background: #e85b81;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+/* ซ่อนปุ่มเลือกและผลลัพธ์ตอนยังไม่เริ่ม */
+.game-container.is-idle .choices,
+.game-container.is-idle #resultBox {
+  display: none;
+}
+
+/* ข้อความนำตอนยังไม่เริ่ม – ทำให้ดูจางนิด */
+.game-container.is-idle #questionBox {
+  opacity: 0.85;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: #e85b81;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.result.show {
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 💖 heart burst effect */
+@keyframes burst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.burst-heart {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: burst 0.6s ease forwards;
+  pointer-events: none;
+}
+
+/* === 🌟 Promise / Outro === */
+.promise {
+  position: relative;
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  /* background: linear-gradient(180deg, #ffeaf3 0%, #fff 70%); */
+  overflow: hidden;
+  z-index: 1;
+}
+
+.promise .sky {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+        2px 2px at 20% 30%,
+        rgba(255, 255, 255, 0.9) 50%,
+        transparent 51%
+      )
+      repeat,
+    radial-gradient(
+        2px 2px at 70% 60%,
+        rgba(255, 255, 255, 0.8) 50%,
+        transparent 51%
+      )
+      repeat,
+    radial-gradient(
+        2px 2px at 40% 80%,
+        rgba(255, 255, 255, 0.85) 50%,
+        transparent 51%
+      )
+      repeat;
+  background-size: 300px 300px, 260px 260px, 340px 340px;
+  animation: twinkle 6s linear infinite;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    filter: brightness(1);
+    transform: translateY(0);
+  }
+  50% {
+    filter: brightness(1.25);
+    transform: translateY(-4px);
+  }
+}
+
+.promise-box {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(255, 120, 170, 0.25);
+  padding: 36px 28px;
+  text-align: center;
+}
+
+.promise-box h2 {
+  font-size: clamp(22px, 3.5vw, 34px);
+  color: #e85b81;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.promise-box p {
+  color: #333;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ปุ่ม action ใช้โทนเดียวกับปุ่มเกม */
+.btn.action {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.15s ease;
+}
+.btn.action:hover {
+  transform: translateY(-1px);
+}
+.btn.action.primary {
+  background: linear-gradient(135deg, #ff7eb9, #ff758c);
+}
+
+/* Footer */
+.footer {
+  padding: 24px 12px 40px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.promise .foreground-2 {
+  position: absolute;
+  bottom: 45vh;
+  left: 8vw;
+  width: 100%;
+  height: auto;
+  max-width: 150px !important;
+  min-width: unset;
+  z-index: 5;
+  box-shadow: none;
+  transform: rotate(-15deg);
+  -webkit-transform: rotate(-15deg);
+  -moz-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  -o-transform: rotate(-15deg);
+}
+/* มือถือ */
+@media (max-width: 768px) {
+  .promise .foreground-2 {
+    position: absolute;
+    top: 10dvh;
+    left: 1dvw;
+    width: 100%;
+    height: auto;
+    max-width: 120px !important;
+    min-width: unset;
+    z-index: 5;
+    box-shadow: none;
+    transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+  }
+}

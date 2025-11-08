@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For U Kub Babe</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Intro overlay -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__center">
+      <div class="intro__text"></div>
+    </div>
+  </div>
+
+  <audio id="bgm" preload="auto">
+  </audio>
+
+  <!-- ปุ่มเปิดเสียง -->
+  <button class="audio-cta" hidden aria-label="เปิดเสียง">เปิดเสียง 🎵</button>
+
+  <!-- ตัวควบคุมเสียง -->
+  <div class="volume-control" hidden>
+    <span id="volumeIcon">🔊</span>
+    <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.8" title="ปรับระดับเสียง" />
+  </div>
+
+  <!-- Floating Hearts -->
+  <div class="hearts"></div>
+
+  <div class="container is-hidden">
+    <div class="top-image">
+      <img src="/imgs/bit.png" alt="" class="foreground">
+      <img src="/imgs/us1.jpeg" alt="">
+    </div>
+
+    <div class="row-1">
+      <div class="col-1">
+        <video autoplay loop muted playsinline>
+          <source src="imgs/photobootsVDO.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="col-2">
+        <h1 id="main">สุขสันต์วันครบรอบ 1 เดือนคั้บที่รัก</h1>
+        <p>ขอบคุณนะคั้บที่เข้ามาเติมเต็มชีวิตเค้าทำให้เค้ามีความสุขมากๆ เค้ารู้สึกชีวิตมีสีสัน มีเป้าหมายมากขึ้น
+          เธอเป็นแฟนที่น่ารักมาก เค้าอยากทำให้เธอเป็นคนที่โชคดีที่สุด
+          เค้าอยากทำให้ที่รักมีความสุขที่สุด เค้าพูดไม่เก่ง ก็อย่างที่เคยบอกไว้เค้ารักที่รักนะคับ</p>
+        <p>ปล. เค้าทำอะไรแบบนี้เป็นครั้งแรกหวังว่าที่รักจะชอบนะคั้บ 🥺</p>
+      </div>
+    </div>
+
+    <!-- Memories Section -->
+    <div class="memories">
+      <div class="memory left">
+        <div class="photo">
+          <img src="imgs/first-date.jpeg" alt="moment1" />
+        </div>
+        <div class="text">
+          <h2>การเจอกันครั้งแรกของเรา 💕</h2>
+          <p>เค้าจำได้แม่น ว่าครั้งแรกที่เค้าเจอเธอ เค้ารู้สึกว่าเธอน่ารักมากๆ เดตแรกเราเป็นหนังสยองขวัญ
+            ปกติเค้าเป็นคนกลัวผีนะ แต่เค้าไม่รู้สึกกลัวเลยเมื่ออยู่กับเธอ</p>
+        </div>
+      </div>
+
+      <div class="memory right">
+        <div class="text">
+          <h2>ทะเลแรกของเรา ⛵</h2>
+          <p>ครั้งที่ 2 ก็ไปทะเลกันซะแล้ว 5555 จากที่พูดเล่นๆเพราะไม่รู้จะไปไหน
+            วันนั้นเค้าแฮปปี้มากๆนะที่ได้มาที่นี่กับเธอ ไว้ไปด้วยกันอีกนะ </p>
+        </div>
+        <div class="photo">
+          <img src="imgs/Date-2.jpeg" alt="moment2" />
+        </div>
+      </div>
+
+      <div class="memory left">
+        <div class="photo">
+          <img src="imgs/IMG_7371.jpeg" alt="moment3" />
+        </div>
+        <div class="text">
+          <h2>Photo Boots รูปแรก</h2>
+          <p>นี่เป็นการถ่าย Photo Boots แบบนี้ครั้งแรกของเค้า และเป็น Photo Boots รูปแรกของเรา
+            และจะเป็นอีกรูปโปรดของเค้าต่อไปจากนี้💗</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Carousel -->
+    <section class="gallery">
+      <h2 class="gallery-title">Our Moments ✨</h2>
+
+      <div class="carousel" aria-label="Love gallery">
+        <div class="flash"></div>
+        <button class="nav prev" aria-label="Previous slide">◀</button>
+
+        <div class="viewport">
+          <ul class="track">
+            <!-- หนึ่งสไลด์ = หนึ่ง <li> -->
+            <li class="slide">
+              <img src="imgs/Bamee1.jpeg" alt="" />
+              <p class="caption">my fav pic of you 💗</p>
+            </li>
+            <li class="slide">
+              <img src="imgs/IMG_7405.jpeg" alt="" />
+              <p class="caption">you & me 🌈</p>
+            </li>
+            <li class="slide">
+              <img src="imgs/convert/IMG_7350.jpg" alt="" />
+              <p class="caption">ตลกดีอันนี้ 55555 ชอบๆ</p>
+            </li>
+            <li class="slide">
+              <img src="imgs/Date-4.JPG" alt="" />
+              <p class="caption">ไว้เราไปกินของอร่อยๆ ด้วยกันอีกเยอะๆ</p>
+            </li>
+            <li class="slide">
+              <img src="imgs/Bamee9.jpeg" alt="" />
+              <p class="caption">งั่มๆๆๆๆ</p>
+            </li>
+
+          </ul>
+        </div>
+
+        <button class="nav next" aria-label="Next slide">▶</button>
+      </div>
+
+      <div class="dots" aria-label="Slide indicators"></div>
+    </section>
+
+    <!-- 💌 Love Letter Section -->
+    <section class="love-letter">
+      <div class="paper">
+        <div class="text-area">
+          <p id="letterText"></p>
+          <p class="signature">– 09/11/2025 💖</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 💘 Mini Game: Who’s More Likely To -->
+    <section class="love-game">
+      <div class="game-container is-idle"> <!-- ⬅ เพิ่ม is-idle -->
+        <h2 class="game-title">Who’s More Likely To... 💞</h2>
+
+        <div id="questionBox" class="question">กดเริ่มเพื่อเริ่มเกมเลย 💕</div>
+
+        <div class="choices">
+          <button id="meBtn" class="btn me">เค้า 💖</button>
+          <button id="youBtn" class="btn you">เธอ 💞</button>
+        </div>
+
+        <button id="startBtn" class="start-btn">เริ่มเกม 💫</button>
+
+        <div id="resultBox" class="result hidden"></div>
+        <p> <br>- Game นี้ไม่มีคะแนน หรือ รางวัลหรอก แค่อยากให้เธอยิ้ม และ สนุกไปด้วย -</p>
+      </div>
+
+
+    </section>
+
+    <!-- 🌟 Bottom / Promise Section -->
+    <section class="promise">
+      <img class="foreground-2" src="/imgs/bit2.PNG" alt="">
+      <div class="sky" aria-hidden="true"></div>
+      <div class="promise-box">
+        <h2>อยู่ข้างๆ กันไปนานๆ นะ 💖</h2>
+        <p>
+          ไม่ว่าแต่ละวันจะเป็นยังไง เค้าจะยังอยู่นี่เสมอ<br />
+          ขอบคุณที่ทำให้โลกของเค้าสดใสขึ้นทุกวัน 🌈
+        </p>
+
+        <div class="actions">
+          <button id="replaySong" class="btn action primary">ฟังเพลงอีกครั้ง 🎵</button>
+          <button id="toTop" class="btn action">กลับขึ้นด้านบน ⤴️</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Made with 💗 by คิว — for you</p>
+    </footer>
+
+
+  </div>
+
+  <!-- Script: ควบคุมลำดับข้อความ -->
+  <script src="scripts/main.js"> </script>
+
+</body>
+
+
+</html>
