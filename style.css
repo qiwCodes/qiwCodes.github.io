@@ -914,7 +914,7 @@ body {
   -o-transform: rotate(-15deg);
 }
 /* มือถือ */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .promise .foreground-2 {
     position: absolute;
     top: 10dvh;
